@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from the Git repository using credentials
-                git credentialsId: 'github-credentials', url: 'https://github.com/sam28mehrotra/Fiirstjob.git', branch: 'master'
+                git credentialsId: 'github-credentials', url: 'https://github.com/sam28mehrotra/FirstJenkinsJob.git', branch: 'master'
             }
         }
 
