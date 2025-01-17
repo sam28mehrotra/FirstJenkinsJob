@@ -45,13 +45,6 @@ pipeline {
                 bat 'mvn test -DsuiteXmlFile=testng.xml'
             }
         }
-
-        stage('Publish Test Results') {
-            steps {
-                // Publish test results in Jenkins using the JUnit plugin
-                junit '**/target/surefire-reports/TEST-*.xml'  // Adjust this path if necessary
-            }
-        }
     }
     
     post {
