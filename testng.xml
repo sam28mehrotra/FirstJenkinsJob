@@ -4,6 +4,7 @@
         <classes>
             <class name="SamTest" />
             <class name="ThreeclassTest" />
+            <class name="FlipkartTest" />
         </classes>
     </test>
 </suite>
