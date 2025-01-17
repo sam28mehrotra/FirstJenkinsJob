@@ -3,6 +3,7 @@
     <test name="Test">
         <classes>
             <class name="SamTest" />
+            <class name="ThreeclassTest" />
         </classes>
     </test>
 </suite>
