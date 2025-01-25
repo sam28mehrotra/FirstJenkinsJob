@@ -6,6 +6,7 @@ pipeline {
         JAVA_HOME = 'C:\\Program Files\\Java\\jdk-21'  // Ensure this is the correct path to JDK 21
         MAVEN_HOME = 'C:\\Program Files\\Apache\\maven\\apache-maven-3.9.6'  // Ensure this is the correct path to Maven
         PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${env.PATH}"
+        EMAIL_RECIPIENT = 'samarth.28.mehrotra@gmail.com'  // Set your email address here
     }
 
     stages {
@@ -46,13 +47,37 @@ pipeline {
             }
         }
     }
-    
+
     post {
         success {
+            // Send email notification on build success
+            emailext(
+                subject: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "Good news! The build ${env.JOB_NAME} #${env.BUILD_NUMBER} was successful.\n\nView details: ${env.BUILD_URL}",
+                to: "${EMAIL_RECIPIENT}"
+            )
             echo 'Pipeline completed successfully!'
         }
         failure {
+            // Send email notification on build failure
+            emailext(
+                subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "Unfortunately, the build ${env.JOB_NAME} #${env.BUILD_NUMBER} has failed.\n\nView details: ${env.BUILD_URL}",
+                to: "${EMAIL_RECIPIENT}"
+            )
             echo 'Pipeline failed.'
+        }
+        unstable {
+            // Send email notification on unstable build
+            emailext(
+                subject: "Build Unstable: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "The build ${env.JOB_NAME} #${env.BUILD_NUMBER} finished with an unstable status.\n\nView details: ${env.BUILD_URL}",
+                to: "${EMAIL_RECIPIENT}"
+            )
+        }
+        always {
+            // This block will always run regardless of the build status
+            echo 'Build process finished.'
         }
     }
 }
