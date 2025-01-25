@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Test Suite">
-    <test name="Test">
+<suite name="ParallelBrowserTests" parallel="tests" thread-count="2">
+    <test name="ChromeTest">
+        <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="FlipkartTest" />
+            <class name="Facebook"/>
+        </classes>
+    </test>
+    <test name="FirefoxTest">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="Facebook"/>
+        </classes>
+    </test>
+    <test name="EdgeTest">
+        <parameter name="browser" value="edge"/>
+        <classes>
+            <class name="Facebook"/>
         </classes>
     </test>
 </suite>
